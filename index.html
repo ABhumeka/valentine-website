@@ -2,17 +2,56 @@
 <html>
 <head>
 <title>Happy Valentine's Day ❤️</title>
+
 <style>
 body{
+margin:0;
+padding:0;
+background:linear-gradient(to bottom, #ff9a9e, #fecfef);
 text-align:center;
-background-color:pink;
 font-family:Arial;
+overflow:hidden;
 }
+
+h1{
+color:white;
+margin-top:20px;
+font-size:40px;
+}
+
+p{
+color:white;
+font-size:24px;
+}
+
 img{
 width:300px;
+height:300px;
 border-radius:20px;
+margin-top:20px;
+box-shadow:0 0 20px white;
+}
+
+/* Heart animation */
+.heart{
+position:absolute;
+color:red;
+font-size:30px;
+animation:float 5s linear infinite;
+}
+
+@keyframes float{
+0%{
+transform:translateY(100vh);
+opacity:1;
+}
+100%{
+transform:translateY(-10vh);
+opacity:0;
+}
 }
 </style>
+
 </head>
 
 <body>
@@ -21,9 +60,52 @@ border-radius:20px;
 
 <p>This website is made with love 💖</p>
 
-<img src="photo.jpg.jpeg">
+<img id="slideshow" src="photo.jpg.jpeg">
 
 <p>I Love You Forever 💕</p>
+
+<!-- Music -->
+<audio autoplay loop>
+<source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+/* Slideshow */
+var images = [
+"photo.jpg.jpeg",
+"photo.jpg (2).jpeg",
+"photo.jpg (3).jpeg",
+"photo.jpg (4).jpeg"
+];
+
+var i = 0;
+
+setInterval(function(){
+i++;
+if(i >= images.length){
+i = 0;
+}
+document.getElementById("slideshow").src = images[i];
+}, 2000);
+
+/* Hearts animation */
+function createHeart(){
+var heart = document.createElement("div");
+heart.innerHTML = "❤️";
+heart.className = "heart";
+heart.style.left = Math.random()*100 + "vw";
+heart.style.animationDuration = (Math.random()*3+2) + "s";
+document.body.appendChild(heart);
+
+setTimeout(function(){
+heart.remove();
+},5000);
+}
+
+setInterval(createHeart,300);
+
+</script>
 
 </body>
 </html>
